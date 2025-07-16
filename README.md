@@ -5,9 +5,8 @@ A comprehensive calculator to compare the financial implications of buying vs re
 ## Features
 
 - **Interactive GUI**: Modern, user-friendly interface with input fields for all parameters
-- **Real-time Calculations**: Instant results with visual charts
+- **Real-time Calculations**: Instant results with detailed breakdown
 - **Comprehensive Analysis**: Detailed breakdown of costs, mortgage details, and recommendations
-- **Visual Charts**: Interactive graphs showing cost comparison over time
 - **Tooltips**: Helpful hints for each input parameter
 
 ## Installation
@@ -36,11 +35,6 @@ Run the original command-line version:
 python HomeCalculator.py
 ```
 
-With custom parameters:
-```bash
-python HomeCalculator.py --years 15 --capital 600000 --property-value 2000000 --interest-rate 4.5
-```
-
 ## Input Parameters
 
 | Parameter | Description | Default |
@@ -60,71 +54,15 @@ python HomeCalculator.py --years 15 --capital 600000 --property-value 2000000 --
 
 The calculator provides:
 
-1. **Input Summary**: All parameters used in the calculation
-2. **Mortgage Details**: Monthly payment, total payments, interest paid
-3. **Cost Analysis**: 
+1. **Mortgage Details**: Monthly payment, total payments, interest paid
+2. **Cost Analysis**: 
    - Total buying costs vs renting costs
    - Property future value vs investment value
-   - Net worth comparison
-4. **Recommendation**: Whether buying or renting is financially better
-5. **Visual Chart**: Interactive graph showing cost trends over time
+3. **Recommendation**: Whether buying or renting is financially better
 
 ## Files
 
 - `HomeCalculatorGUI.py` - Main GUI application
 - `HomeCalculator.py` - Original command-line calculator
 - `CostTable.py` - Core calculation logic
-- `requirements.txt` - Python dependencies
-- `README.md` - This file
-
-## Example Output
-
-```
-🏠  HOME BUYING vs RENTING COST COMPARISON CALCULATOR  🏠
-======================================================================
-
-───────────────── 📋 INPUT PARAMETERS ─────────────────
-📅  Years:                    10
-💰  Capital/Down Payment:     $   500,000.00
-🏠  Property Value:           $ 1,600,000.00
-💳  Interest Rate:               5.00%
-📈  Property Value Increase:     4.50%
-💸  Purchase Costs:           $   110,000.00
-🔧  Monthly Maintenance:      $       200.00
-🏠  Monthly Rent:             $     4,200.00
-📈  Rent Increase:               3.00%
-📊  Alt. Investment Return:      7.00%
-
-───────────────── 📊 MORTGAGE DETAILS ─────────────────
-📅  Loan Term:           10 years
-💳  Monthly Payment:     $   10,000.00
-💰  Total Payments:      $  1,200,000.00
-💸  Total Interest:      $    200,000.00
-🏦  Principal Amount:    $  1,000,000.00
-📈  Interest Rate:           5.00%
-
-───────────────── 📊 ANALYSIS RESULTS ─────────────────
-🏠  BUYING SCENARIO:
-    💰  Total Buying Cost:      $  1,200,000.00
-    📈  Property Future Value:  $  2,400,000.00
-    📊  Net Worth:              $  1,200,000.00
-
-🏠  RENTING SCENARIO:
-    💸  Total Rent Paid:        $    600,000.00
-    📈  Investment Worth:       $  1,000,000.00
-    📊  Net Worth:              $  1,000,000.00
-
-🎯  RECOMMENDATION:
-──────────────────────────────────────────────────
-✅  RECOMMENDATION: BUY
-    💡  You would be $200,000 better off buying
-    📊  Difference (Buying - Renting): $200,000
-```
-
-## Contributing
-
-Feel free to submit issues, feature requests, or pull requests to improve the calculator!
-
-## License
-
-This project is open source and available under the MIT License. 
+- `requirements.txt` - Python dependencies 

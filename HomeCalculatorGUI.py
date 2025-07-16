@@ -121,6 +121,14 @@ class HomeCalculatorGUI:
             
             # Tooltip
             self.create_tooltip(entry, tooltip)
+        
+        # Calculate button - placed beneath input parameters
+        calculate_btn = ttk.Button(input_frame, text="🔄 Calculate", 
+                                  command=self.calculate, style='Accent.TButton')
+        calculate_btn.grid(row=len(inputs), column=0, columnspan=2, pady=(20, 0), sticky=(tk.E, tk.W))
+        
+        # Configure button style for larger text
+        self.style.configure('Accent.TButton', font=('Arial', self.button_font_size, 'bold'))
     
     def create_results_section(self, parent):
         """Create the results display section with multiple columns"""
@@ -142,19 +150,11 @@ class HomeCalculatorGUI:
         col2_frame.rowconfigure(0, weight=1)  # Make it expandable
         self.col2_frame = col2_frame
         
-        # Calculate button - placed under mortgage details
-        calculate_btn = ttk.Button(col1_frame, text="🔄 Calculate", 
-                                  command=self.calculate, style='Accent.TButton')
-        calculate_btn.grid(row=0, column=0, pady=10, sticky=(tk.E, tk.W))
-        
-        # Configure button style for larger text
-        self.style.configure('Accent.TButton', font=('Arial', self.button_font_size, 'bold'))
-        
         # Initial messages
         initial_label1 = ttk.Label(col1_frame, 
                                   text="Click 'Calculate' to see the analysis results...",
                                   font=('Arial', self.normal_font_size))
-        initial_label1.grid(row=1, column=0, pady=10)
+        initial_label1.grid(row=0, column=0, pady=10)
         self.results_widgets['initial1'] = initial_label1
         
         initial_label2 = ttk.Label(col2_frame, 
@@ -220,6 +220,12 @@ class HomeCalculatorGUI:
             # Get calculation results
             results = self._get_calculation_results(calculator)
             
+            # Calculate the key values using the calculator methods
+            total_buying_cost = calculator.cost_table.total_buying_cost()
+            total_rent_paid = calculator.cost_table.total_rent_paid()
+            total_investment_worth = calculator.cost_table.total_investment_value()
+            property_future_value = calculator.property_value * (1 + calculator.property_value_increase / 100) ** calculator.years
+            
             # COLUMN 1: Mortgage Details
             row1 = 1  # Start at row 1 since row 0 has the calculate button
             
@@ -243,32 +249,7 @@ class HomeCalculatorGUI:
                 label.grid(row=row1 + i, column=0, sticky=tk.W, pady=2)
                 self.results_widgets[f'mortgage_{i}'] = label
             
-            # Add Summary section under mortgage details in left column
-            row1 += len(mortgage_details) + 2  # Add some spacing
-            
-            # Summary Frame in left column
-            summary_frame = ttk.LabelFrame(self.col1_frame, text="📋 SUMMARY", padding="10")
-            summary_frame.grid(row=row1, column=0, sticky=(tk.W, tk.E), pady=(10, 0))
-            summary_frame.columnconfigure(0, weight=1)
-            row1 += 1
-            
-            # Calculate values exactly like terminal
-            property_future_value = calculator.property_value * (1 + calculator.property_value_increase / 100) ** calculator.years
-            total_buying_cost = calculator.cost_table.total_buying_cost()
-            total_rent_paid = calculator.cost_table.total_rent_paid()
-            total_investment_worth = calculator.cost_table.total_investment_value()
-            diff = property_future_value - total_investment_worth
-            
-            summary_details = [
-                f"    Buying Net Worth:  ${property_future_value:>12,.2f}",
-                f"    Renting Net Worth: ${total_investment_worth:>12,.2f}",
-                f"    Difference:        ${diff:>12,.2f}"
-            ]
-            
-            for i, text in enumerate(summary_details):
-                label = ttk.Label(summary_frame, text=text, font=('Arial', self.normal_font_size))
-                label.grid(row=i, column=0, sticky=tk.W, pady=2)
-                self.results_widgets[f'summary_{i}'] = label
+
             
             # COLUMN 2: Analysis Results (matching terminal exactly)
             row2 = 0
